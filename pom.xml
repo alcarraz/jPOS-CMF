@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jpos.org</groupId>
   <artifactId>jpos-cmf</artifactId>
-  <version>1.0.13</version>
+  <version>1.0.16</version>
   <name>jPOS-CMF</name>
   <packaging>pom</packaging>
 
@@ -46,7 +46,7 @@
           <dependency>
             <groupId>net.sf.docbook</groupId>
             <artifactId>docbook-xml</artifactId>
-            <version>5.0-all</version>
+            <version>5.1b4-all</version>
             <classifier>resources</classifier>
             <type>zip</type>
             <scope>runtime</scope>

@@ -1,5 +1,9 @@
 <!DOCTYPE chapter[
   <!ENTITY % constants SYSTEM "constants.ent" >
+  <!ENTITY pdc_rm_rc_low SYSTEM "pdc_rm_rc_low.inc" >
+  <!ENTITY pdc_rm_rc_high SYSTEM "pdc_rm_rc_high.inc" >
+  <!ENTITY pdc_vm_vc_low SYSTEM "pdc_vm_vc_low.inc" >
+  <!ENTITY pdc_vm_vc_high SYSTEM "pdc_vm_vc_high.inc" >
   %constants;
 ]>
 <chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -33,7 +37,7 @@
      </listitem>
     </itemizedlist></para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_002">
   <title xml:id="de_002">DE-002 Primary Account Number (PAN)</title>
   <indexterm>
@@ -55,7 +59,7 @@
    <para> If this field is not present and the message contains data element 35, the system will
     obtain the primary account by parsing the track-two data contained there. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_003">
   <title xml:id="de_003">DE-003 Processing Code</title>
   <indexterm>
@@ -86,7 +90,7 @@
     </itemizedlist></para>
    <para> The Transaction Type Code (TTC) is used along with the Message Type Indicator (MTI) as a
     key to uniquely identify the type of transaction being processed. </para>
-   <table frame="topbot">
+   <table xml:id="txn_type_code" frame="topbot">
     <title>Positions 1 &amp; 2 (Transaction Type Code)</title>
     <tgroup cols="3" align="left" colsep="1" rowsep="1">
      <colspec colname="mti"/>
@@ -147,6 +151,16 @@
         <emphasis role="bold">100</emphasis>
        </entry>
        <entry>
+        <emphasis role="bold">11</emphasis>
+       </entry>
+       <entry>Authorization (Quasi-cash)
+       </entry>
+      </row>
+      <row>
+       <entry>
+        <emphasis role="bold">100</emphasis>
+       </entry>
+       <entry>
         <emphasis role="bold">20</emphasis>
        </entry>
        <entry>Refund/Return <emphasis role="italic">(See <xref linkend="auth"/>)</emphasis>
@@ -170,6 +184,17 @@
         <emphasis role="bold">30</emphasis>
        </entry>
        <entry>Balance Inquiry <emphasis role="italic">(See <xref linkend="auth"/>)</emphasis>
+       </entry>
+      </row>
+      <row>
+       <entry>
+        <emphasis role="bold">100</emphasis>
+       </entry>
+       <entry>
+        <emphasis role="bold">33</emphasis>
+       </entry>
+       <entry>
+           Verification inquiry <emphasis role="italic">(See <xref linkend="function_codes"/>)</emphasis>
        </entry>
       </row>
       <row>
@@ -209,6 +234,16 @@
        </entry>
        <entry>POS Purchase With Cashback</entry>
       </row>      
+      <row>
+       <entry>
+        <emphasis role="bold">200</emphasis>
+       </entry>
+       <entry>
+        <emphasis role="bold">11</emphasis>
+       </entry>
+       <entry>Financial Purchase (Quasi-cash)
+       </entry>
+      </row>
       <row>
        <entry>
         <emphasis role="bold">200</emphasis>
@@ -283,6 +318,39 @@
           linkend="reversal"/>)</emphasis>
        </entry>
       </row>
+      <row>
+       <entry>
+        <emphasis role="bold">600</emphasis>
+       </entry>
+       <entry>
+        <emphasis role="bold">70</emphasis>
+       </entry>
+       <entry><anchor xml:id="txcode.pin_change" xreflabel="PIN Change transaction code"/>
+        PIN Change <emphasis role="italic">(See <xref linkend="S.de_113.52"/>)</emphasis>
+       </entry>
+      </row>
+      <row>
+       <entry>
+        <emphasis role="bold">600</emphasis>
+       </entry>
+       <entry>
+        <emphasis role="bold">73</emphasis>
+       </entry>
+       <entry><anchor xml:id="txcode.card_block" xreflabel="Card block"/>
+        Card block
+       </entry>
+      </row>
+      <row>
+       <entry>
+        <emphasis role="bold">600</emphasis>
+       </entry>
+       <entry>
+        <emphasis role="bold">74</emphasis>
+       </entry>
+       <entry><anchor xml:id="txcode.card_unblock" xreflabel="Card unblock"/>
+        Card unblock
+       </entry>
+      </row>
      </tbody>
     </tgroup>
    </table>
@@ -354,7 +422,7 @@
     </tgroup>
    </table>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_004">
   <title xml:id="de_004">DE-004 Amount transaction</title>
   <indexterm>
@@ -384,7 +452,7 @@
     </listitem>
    </itemizedlist>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_005">
   <title xml:id="de_005">DE-005 Amount reconciliation</title>
   <indexterm>
@@ -414,7 +482,7 @@
     </listitem>
    </itemizedlist>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_006">
   <title xml:id="de_006">DE-006 Amount cardholder billing</title>
   <indexterm>
@@ -445,7 +513,7 @@
     </listitem>
    </itemizedlist>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_007">
   <title xml:id="de_007">DE-007 Date and time transmission</title>
   <indexterm>
@@ -465,7 +533,7 @@
    <para>Date and time the message initiator sends this message expressed in UTC (MMDDhhmmss).
    </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_008">
   <title xml:id="de_008">DE-008 Amount cardholder billing fee</title>
   <indexterm>
@@ -500,7 +568,63 @@
     </listitem>
    </itemizedlist>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
+ <sect1 xml:id="S.de_009">
+  <title xml:id="de_009">DE-009 Conversion rate, settlement</title>
+  <indexterm>
+   <primary>Data Elements</primary>
+   <secondary>DE 009, Conversion rate, settlement</secondary>
+  </indexterm>
+  <simplesect>
+   <title>Data Element: 9</title>
+   <para/>
+  </simplesect>
+  <simplesect>
+   <title>Format: N8</title>
+   <para/>
+  </simplesect>
+  <simplesect>
+   <title>Description</title>
+   <para>Contains the conversion rate used for settlement purposes, formatted as ABBBBBBB. It is 
+   used when the transaction currency is different from the settlement currency.
+   <itemizedlist>
+     <listitem>
+      <para>A: single digit represents the position of the decimal point, counted from the right.</para>
+     </listitem>
+     <listitem>
+      <para>BBBBBBB: seven digits that represent the conversion factor.</para>
+     </listitem>
+   </itemizedlist></para>
+  </simplesect>
+ </sect1><?hard-pagebreak?>
+ <sect1 xml:id="S.de_010">
+  <title xml:id="de_010">DE-010 Conversion rate, cardholder billing</title>
+  <indexterm>
+   <primary>Data Elements</primary>
+   <secondary>DE 010, Conversion rate, cardholder billing</secondary>
+  </indexterm>
+  <simplesect>
+   <title>Data Element: 10</title>
+   <para/>
+  </simplesect>
+  <simplesect>
+   <title>Format: N8</title>
+   <para/>
+  </simplesect>
+  <simplesect>
+   <title>Description</title>
+   <para>Contains the conversion rate used for billing the cardholder, formatted as ABBBBBBB. It is 
+   used when the transaction currency is different from the cardholder billing currency.
+   <itemizedlist>
+     <listitem>
+      <para>A: single digit represents the position of the decimal point, counted from the right.</para>
+     </listitem>
+     <listitem>
+      <para>BBBBBBB: seven digits that represent the conversion factor.</para>
+     </listitem>
+   </itemizedlist></para>
+  </simplesect>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_011">
   <title xml:id="de_011">DE-011 System Trace Audit Number (STAN)</title>
   <indexterm>
@@ -519,7 +643,7 @@
    <title>Description</title>
    <para> Unique sequence number used to match a request/response pair. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_012">
   <title xml:id="de_012">DE-012 Date and time local transaction</title>
   <indexterm>
@@ -540,7 +664,7 @@
     day and time in which the transaction takes place at the card acceptor location. </para>
    <para> This field remains unchanged throughout the lifetime of the transaction. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_013">
   <title xml:id="de_013">DE-013 Date effective</title>
   <indexterm>
@@ -559,7 +683,7 @@
    <title>Description</title>
    <para> Effective card date in CCYYMM format. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_014">
   <title xml:id="de_014">DE-014 Expiration date</title>
   <indexterm>
@@ -580,7 +704,7 @@
     automatically capture either the track2 or track1. The expiration date should represent the date
     after which the card has to be flagged as expired and the transaction declined. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_015">
   <title xml:id="de_015">DE-015 Settlement date</title>
   <indexterm>
@@ -601,7 +725,7 @@
       Settlement date in CCYYMMDD format.
     </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_017">
   <title xml:id="de_017">DE-017 Capture date</title>
   <indexterm>
@@ -620,7 +744,7 @@
    <title>Description</title>
    <para> &PRODUCTNAME; capture date in MMDD format. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_018">
   <title xml:id="de_018">DE-018 Message Error Indicator</title>
   <indexterm>
@@ -668,7 +792,26 @@
    <para> The data element in error contains the data element number (001-128) and same goes for
     data sub-element, data set, bit or tag. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
+ <sect1 xml:id="S.de_019">
+  <title xml:id="de_019">DE-019 Acquiring Institution Country Code</title>
+  <indexterm>
+   <primary>Data Elements</primary>
+   <secondary>DE 019, Acquiring Institution Country Code</secondary>
+  </indexterm>
+  <simplesect>
+   <title>Data Element: 19</title>
+   <para/>
+  </simplesect>
+  <simplesect>
+   <title>Format: N3</title>
+   <para/>
+  </simplesect>
+  <simplesect>
+   <title>Description</title>
+   <para>A code identifying the country of the acquiring institution. </para>
+  </simplesect>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_021">
   <title xml:id="de_021">DE-021 Transaction life cycle identification data</title>
   <indexterm>
@@ -701,7 +844,7 @@
      </listitem>
     </itemizedlist></para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_022">
   <title xml:id="de_022">DE-022 Point-of-Service data code</title>
   <indexterm>
@@ -733,1013 +876,27 @@
       <para>Security characteristics</para>
      </listitem>
     </itemizedlist></para>
-   <table frame="all">
+   <table frame="all" xml:id="S.de_022_pdc_rm">
     <title>Card reading method used at POS</title>
-    <tgroup cols="17" align="left" colsep="1" rowsep="1">
-     <colspec colname="c1" colwidth="6*"/>
-     <thead>
-      <row>
-       <entry/>
-       <entry>B1</entry>
-       <entry>B2</entry>
-       <entry>B3</entry>
-       <entry>B4</entry>
-       <entry>B5</entry>
-       <entry>B6</entry>
-       <entry>B7</entry>
-       <entry>B8</entry>
-       <entry>B9</entry>
-       <entry>B10</entry>
-       <entry>B11</entry>
-       <entry>B12</entry>
-       <entry>B13</entry>
-       <entry>B14</entry>
-       <entry>B15</entry>
-       <entry>B16</entry>
-      </row>
-     </thead>
-     <tbody>
-      <row>
-       <entry>Unknown</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Information not taken from card (e.g. RFID)</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry> Physical (key entry or OCR reading of embossing or printed data either at time of
-        transaction or after the event) </entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Bar Code</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Magnetic Stripe</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>ICC</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Account data on file</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>ICC read attempted but failed</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Magnetic stripe read attempted but failed</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Fall back</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-      </row>
-     </tbody>
-    </tgroup>
+    &pdc_rm_rc_low;
    </table>
    <table frame="all">
     <title>Card reading method used at POS (Bits 17 to 32)</title>
-    <tgroup cols="17" align="left" colsep="1" rowsep="1">
-     <colspec colname="c1" colwidth="6*"/>
-     <thead>
-      <row>
-       <entry/>
-       <entry>B17</entry>
-       <entry>B18</entry>
-       <entry>B19</entry>
-       <entry>B20</entry>
-       <entry>B21</entry>
-       <entry>B22</entry>
-       <entry>B23</entry>
-       <entry>B24</entry>
-       <entry>B25</entry>
-       <entry>B26</entry>
-       <entry>B27</entry>
-       <entry>B28</entry>
-       <entry>B29</entry>
-       <entry>B30</entry>
-       <entry>B31</entry>
-       <entry>B32</entry>
-      </row>
-     </thead>
-     <tbody>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved ISO</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved National</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved National</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved National</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved National</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved National</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Track1 Present (jCard Private)</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Track2 Present (jCard Private)</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved Private</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved Private</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved Private</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-      </row>
-     </tbody>
-    </tgroup>
+    &pdc_rm_rc_high;
    </table>
 
    <para> The following table lists the value attributed to each bit of the 32 bits (four bytes)
     which indicate the cardholder verification method actually used by the POS. </para>
-   <table frame="all">
+
+   <table frame="all" xml:id="S.de_022_pdc_vm">
     <title>Cardholder verification method used at POS</title>
-    <tgroup cols="17" align="left" colsep="1" rowsep="1">
-     <colspec colname="c1" colwidth="6*"/>
-     <thead>
-      <row>
-       <entry/>
-       <entry>B1</entry>
-       <entry>B2</entry>
-       <entry>B3</entry>
-       <entry>B4</entry>
-       <entry>B5</entry>
-       <entry>B6</entry>
-       <entry>B7</entry>
-       <entry>B8</entry>
-       <entry>B9</entry>
-       <entry>B10</entry>
-       <entry>B11</entry>
-       <entry>B12</entry>
-       <entry>B13</entry>
-       <entry>B14</entry>
-       <entry>B15</entry>
-       <entry>B16</entry>
-      </row>
-     </thead>
-     <tbody>
-      <row>
-       <entry>Unknown</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>None</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry> Manual signature verification </entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Online PIN</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Offline PIN in clear</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Offline PIN encrypted</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Offline digitized signature analysis</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Offline biometrics</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Offline manual verification, e.g. passport or driver's license</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Offline biographics</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Account based digital signature</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Public key based digital signature</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>1</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-       <entry>-</entry>
-      </row>
-      <row>
-       <entry>Reserved</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>-</entry>
-       <entry>x</entry>
-      </row>
-     </tbody>
-    </tgroup>
+    &pdc_vm_vc_low;
    </table>
    <note>
     <para> Bits 17 to 32 are reserved for ISO, National and Private use and not currently used by
      &PRODUCTNAME;. </para>
    </note>
+
    <para> The following table lists the value attributed to each bit of the 32 bits (four bytes)
     which indicate the POS environment. </para>
    <table frame="all">
@@ -2752,7 +1909,7 @@
      &PRODUCTNAME;.</para>
    </note>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_023">
   <title xml:id="de_023">DE-023 jCard Sequence Number</title>
   <indexterm>
@@ -2772,7 +1929,7 @@
    <para>A number distinguishing between separate cards with the same primary account number.
    </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_024">
   <title xml:id="de_024">DE-024 Function Code</title>
   <indexterm>
@@ -2793,7 +1950,7 @@
      linkend="function_codes"/> provides a list of function codes values supported by &PRODUCTNAME;
    </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_025">
   <title xml:id="de_025">DE-025 Reason Code</title>
   <indexterm>
@@ -2815,7 +1972,7 @@
     values supported by &PRODUCTNAME;
    </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_026">
   <title xml:id="de_026">DE-026 Merchant Category Code</title>
   <indexterm>
@@ -2832,10 +1989,122 @@
   </simplesect>
   <simplesect>
    <title>Description</title>
-   <para>Code classifying the type of business being done by the card acceptor for this transaction
+   <para>Code classifying the type of business being done by the card acceptor for this transaction. See <xref linkend="mcc"/>.
    </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
+
+ <sect1 xml:id="S.de_027">
+  <title xml:id="de_027">DE-027 Point of service capabilities</title>
+  <indexterm>
+   <primary>Data Elements</primary>
+   <secondary>DE 027, Point of service capabilities</secondary>
+  </indexterm>
+  <simplesect>
+   <title>Data Element: 27</title>
+   <para/>
+  </simplesect>
+  <simplesect>
+   <title>Format: B27</title>
+   <para/>
+  </simplesect>
+  <simplesect>
+   <title>Description</title>
+   <para>
+       Provides information about POS card reading and cardholder verification capabilities, approval code 
+       and PIN input length, cardholder and card acceptor receipt and display length, ICC scripts length, 
+       track 3 rewrite and card capture capability.
+   </para>
+   <table frame="topbot">
+    <title>DE 27 subfields</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+     <colspec colname="name"/>
+     <colspec colname="format" colwidth="2*"/>
+     <thead>
+      <row>
+       <entry>Name</entry>
+       <entry>Format</entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>POS card reading capability</entry>
+       <entry>4B - see <xref  linkend="S.de_027_pdc_rc"/>  and <xref  linkend="S.de_022_pdc_rm"/></entry>
+      </row>
+
+      <row>
+       <entry>POS cardholder verification capability</entry>
+       <entry>4B - see  <xref linkend="S.de_027_pdc_vc"/> and  <xref  linkend="S.de_022_pdc_vm"/> </entry>
+      </row>
+
+      <row>
+       <entry>Approval code length</entry>
+       <entry>N1</entry>
+      </row>
+
+      <row>
+       <entry>Cardholder receipt data length</entry>
+       <entry>N3</entry>
+      </row>
+
+      <row>
+       <entry>Card acceptor receipt data length</entry>
+       <entry>N3 (000 indicates no such capability)</entry>
+      </row>
+
+      <row>
+       <entry>Cardholder display data length</entry>
+       <entry>N3 (000 indicates no such capability)</entry>
+      </row>
+
+      <row>
+       <entry>Card acceptor display data length</entry>
+       <entry>N3 (000 indicates no such capability)</entry>
+      </row>
+
+      <row>
+       <entry>ICC scripts data length</entry>
+       <entry>N3 (000 indicates no such capability)</entry>
+      </row>
+
+      <row>
+       <entry>Magnetic stripe track 3 rewrite capability</entry>
+       <entry>A1 (Y or N)</entry>
+      </row>
+
+      <row>
+       <entry>Card capture capability</entry>
+       <entry>A1 (Y or N)</entry>
+      </row>
+
+      <row>
+       <entry>PIN input length capability</entry>
+       <entry>B 1</entry>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+   <table frame="all" xml:id="S.de_027_pdc_rc">
+     <title>POS card reading capabilities</title>
+     &pdc_rm_rc_low;
+   </table>
+   <table frame="all" xml:id="S.de_027_pdc_vc">
+     <title>POS card reading capability (Bits 17 to 32)</title>
+     &pdc_rm_rc_high;
+   </table>
+   <para> The following table lists the value attributed to each bit of the 32 bits (four bytes)
+    which indicate the cardholder verification capabilities supported by the POS.</para>
+   <table frame="all">
+    <title>Cardholder verification capabilities</title>
+    &pdc_vm_vc_low;
+   </table>
+   <note>
+    <para> Bits 17 to 32 are reserved for ISO, National and Private use and not currently used by
+     &PRODUCTNAME;. </para>
+   </note>
+  </simplesect>
+ </sect1><?hard-pagebreak?>
+
  <sect1 xml:id="S.de_030">
   <title xml:id="de_030">DE-030 Amounts original</title>
   <indexterm>
@@ -2874,7 +2143,7 @@
     </listitem>
    </itemizedlist>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_032">
   <title xml:id="de_032">DE-032 Acquiring institution identification code</title>
   <indexterm>
@@ -2893,7 +2162,7 @@
    <title>Description</title>
    <para>A code identifying the acquirer. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
   <sect1 xml:id="S.de_033">
     <title xml:id="de_033">DE-033 Forwarding institution identification code</title>
     <indexterm>
@@ -2912,7 +2181,7 @@
       <title>Description</title>
       <para>A code identifying the forwarding institution. </para>
     </simplesect>
-  </sect1>
+  </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_035">
   <title xml:id="de_035">DE-035 Track 2 data</title>
   <indexterm>
@@ -2970,7 +2239,7 @@
     </tgroup>
    </table>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_037">
   <title xml:id="de_037">DE-037 Retrieval Reference Number</title>
   <indexterm>
@@ -2993,7 +2262,7 @@
       alphanumeric field that may contain regular characters.</para>
     </tip></para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_038">
   <title xml:id="de_038">DE-038 Approval Code</title>
   <indexterm>
@@ -3013,7 +2282,7 @@
    <para> Approval Code assigned by &PRODUCTNAME; when the transaction is approved (see DE 039).
    </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_039">
   <title xml:id="de_039">DE-039 Result Code</title>
   <indexterm>
@@ -3030,10 +2299,10 @@
   </simplesect>
   <simplesect>
    <title>Description</title>
-   <para> Result Code returned by &PRODUCTNAME; to indicate whether the transaction is approved or
-    declined. <xref  linkend="result_codes"/> provides a list of result codes supported by &PRODUCTNAME;</para>
+   <para> Result Code (also called Action Code in ISO-8583v2003/2023) returned by &PRODUCTNAME; to indicate whether the transaction is approved or
+    declined. <xref  linkend="result_codes"/> provides a list of result codes supported by &PRODUCTNAME;.</para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_041">
   <title xml:id="de_041">DE-041 Card Acceptor Terminal ID ('TID')</title>
   <indexterm>
@@ -3053,7 +2322,7 @@
    <para>A code used to uniquely identify the terminal originating a transaction; this code is also
     referred to as the Terminal Identifier or 'TID.' </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_042">
   <title xml:id="de_042">DE-042 Card Acceptor Identification Code ('MID')</title>
   <indexterm>
@@ -3073,7 +2342,7 @@
    <para>A code used to uniquely identify the card acceptor originating a transaction; this code is
     also referrred to as the Merchant Identifier or 'MID.'  </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_043">
   <title xml:id="de_043">DE-043 Card acceptor name/location</title>
   <indexterm>
@@ -3156,7 +2425,7 @@
     </tgroup>
    </table>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_045">
   <title xml:id="de_045">DE-045 Track 1 data</title>
   <indexterm>
@@ -3178,7 +2447,7 @@
     </footnote> including field separators and excluding the start sentinel, end sentinel and
     longitudinal redundancy check ('LRC') characters. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_046">
   <title xml:id="de_046">DE-046 Amounts fees</title>
   <indexterm>
@@ -3241,7 +2510,7 @@
     </tgroup>
    </table>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_049">
   <title xml:id="de_049">DE-049 Verification data</title>
   <indexterm>
@@ -3263,6 +2532,8 @@
     cardholder) or something (e.g. account existence) through the use of address verification,
     account verification or other identification such as a national ID, driver's license, CVV2,
     CVC2, 4DBC, etc.). </para>
+
+   <para>The following table lists the subelements that may appear in the  <emphasis role="italic">request</emphasis>.</para>
    <table frame="topbot">
     <title>DE 49 subfields, Dataset identifier 71</title>
     <tgroup cols="4" align="left" colsep="1" rowsep="1">
@@ -3336,6 +2607,8 @@
      </tbody>
     </tgroup>
    </table>
+
+   <para>The following table lists the subelements that may appear in the <emphasis role="italic">response</emphasis>.</para>
    <table frame="topbot">
     <title>DE 49 subfields, Dataset identifier 72</title>
     <tgroup cols="4" align="left" colsep="1" rowsep="1">
@@ -3365,7 +2638,25 @@
        <entry>AN1</entry>
       </row>
       <row>
-       <entry>3-15</entry>
+       <entry>3</entry>
+       <entry>Card Verification Value for Card not present</entry>
+       <entry/>
+       <entry>AN2</entry>
+      </row>
+      <row>
+       <entry>4</entry>
+       <entry>Card Verification Value for Card present</entry>
+       <entry/>
+       <entry>AN2</entry>
+      </row>
+      <row>
+       <entry>5</entry>
+       <entry>ICC data validation</entry>
+       <entry/>
+       <entry>AN2</entry>
+      </row>
+      <row>
+       <entry>6-15</entry>
        <entry>Reserved for ISO use</entry>
        <entry/>
        <entry>ANS 40</entry>
@@ -3380,7 +2671,7 @@
     </tgroup>
    </table>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_052">
   <title xml:id="de_052">DE-052 PIN Block</title>
   <indexterm>
@@ -3399,7 +2690,7 @@
    <title>Description</title>
    <para>PIN related data in ISO 9564-1 format used to identify the cardholder</para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_053">
   <title xml:id="de_053">DE-053 Security Related Control Information</title>
   <indexterm>
@@ -3424,7 +2715,7 @@
     card or signature strip, but not encoded on the magnetic stripe.
    </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_054">
   <title xml:id="de_054">DE-054 Additional Amount(s)</title>
   <indexterm>
@@ -3512,7 +2803,7 @@
     </tgroup>
    </table>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_055">
   <title xml:id="de_055">DE-055 Integrated Circuit Card (ICC) Related Data</title>
   <indexterm>
@@ -3531,7 +2822,7 @@
     This field contains integrated circuit card (ICC) related data in an ISO 7816-6 TLV coding structure.
    </para>
   </simplesect>
- </sect1> 
+ </sect1><?hard-pagebreak?> 
  <sect1 xml:id="S.de_056">
   <title xml:id="de_056">DE-056 Original data elements</title>
   <indexterm>
@@ -3568,7 +2859,7 @@
      </listitem>
     </itemizedlist></para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_059">
   <title xml:id="de_059">DE-059 Transport data</title>
   <indexterm>
@@ -3588,7 +2879,7 @@
    <para>Contains data from the originator of the message that shall be returned unaltered in a
     response message. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_063">
   <title xml:id="de_063">DE-063 Display message</title>
   <indexterm>
@@ -3610,7 +2901,7 @@
    <para>
     <literal>locale</literal> names are defined at &PRODUCTNAME; configuration time. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_068">
   <title xml:id="de_068">DE-068 Batch/file transfer message control</title>
   <indexterm>
@@ -3629,7 +2920,7 @@
    <title>Description</title>
    <para>Used in settlement message to transmit the terminal's batch number.</para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_069">
   <title xml:id="de_069">DE-069 Batch/file transfer control data</title>
   <indexterm>
@@ -3659,7 +2950,7 @@
    </itemizedlist>
 
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_072">
   <title xml:id="de_072">DE-072 Data record</title>
   <indexterm>
@@ -3679,7 +2970,7 @@
    <para>Other data required to be passed to support an administrative or file action message.
    </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_074">
   <title xml:id="de_074">DE-074 Reconciliation data primary</title>
   <indexterm>
@@ -3751,7 +3042,7 @@
        <entry>N10</entry>
       </row>
       <row>
-       <entry>Debitss reversal amount</entry>
+       <entry>Debits reversal amount</entry>
        <entry>N16</entry>
       </row>
       <row>
@@ -3762,7 +3053,7 @@
     </tgroup>
    </table>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_093">
   <title xml:id="de_093">DE-093 Transaction destination institution identification code</title>
   <indexterm>
@@ -3781,7 +3072,7 @@
    <title>Description</title>
    <para>A code identifying the Transaction destination institution.</para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_094">
   <title xml:id="de_094">DE-094 Transaction originator institution identification code</title>
   <indexterm>
@@ -3800,7 +3091,51 @@
    <title>Description</title>
    <para>A code identifying the Transaction originator institution identification. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
+
+ <sect1 xml:id="S.de_095">
+  <title xml:id="de_095">DE-095 Replacement Amounts</title>
+  <indexterm>
+   <primary>Data Elements</primary>
+   <secondary>DE 095, Replacement Amounts</secondary>
+  </indexterm>
+  <simplesect>
+   <title>Data Element: 95</title>
+   <para/>
+  </simplesect>
+  <simplesect>
+   <title>Format: N96</title>
+   <para/>
+  </simplesect>
+  <simplesect>
+   <title>Description</title>
+   <para> This field contains the corrected amounts of an authorization transaction. This field has 3 subfields:</para>
+   <itemizedlist>
+    <listitem>
+     <para>DE 095.01: Actual Transaction Amount</para>
+    </listitem>
+    <listitem>
+     <para>DE 095.02: Actual Settlement Amount</para>
+    </listitem>
+    <listitem>
+     <para>DE 095.03: Actual Cardholder Billing Amount</para>
+    </listitem>
+   </itemizedlist>
+   <para> Each subfield has 16-positions, each a data element constructed of three parts: </para>
+   <itemizedlist>
+    <listitem>
+     <para>ISO-4217 Currency code, N3</para>
+    </listitem>
+    <listitem>
+     <para>Currency minor unit, N1</para>
+    </listitem>
+    <listitem>
+     <para>Amount Transaction, N12</para>
+    </listitem>
+   </itemizedlist>
+  </simplesect>
+ </sect1><?hard-pagebreak?>
+ 
  <sect1 xml:id="S.de_097">
   <title xml:id="de_097">DE-097 Amount, Net reconciliation</title>
   <indexterm>
@@ -3831,7 +3166,7 @@
     </listitem>
    </itemizedlist>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_099">
   <title xml:id="de_099">DE-099 Settlement institution identification code</title>
   <indexterm>
@@ -3850,7 +3185,7 @@
    <title>Description</title>
    <para>A code identifying the settlement institution. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_100">
   <title xml:id="de_100">DE-100 Receiving institution identification code</title>
   <indexterm>
@@ -3869,9 +3204,9 @@
    <title>Description</title>
    <para>A code identifying the receiving institution. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_101">
-  <title xml:id="de_101">DE-101 File Name</title>
+  <title xml:id="de_101">DE-101 File Name / Transaction Modifier</title>
   <indexterm>
    <primary>Data Elements</primary>
    <secondary>DE 101, File Name</secondary>
@@ -3886,9 +3221,13 @@
   </simplesect>
   <simplesect>
    <title>Description</title>
-   <para>The actual or abbreviated name of the file being accessed by the transaction. </para>
+   <para>
+       While on file update messages this field containes the actual or abbreviated name of the file being 
+       accessed by the transaction, on regular authorization/financial transactions, it may contain  a transaction 
+       modifier.
+   </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_102">
   <title xml:id="de_102">DE-102 Account identification 1</title>
   <indexterm>
@@ -3907,7 +3246,7 @@
    <title>Description</title>
    <para>Used to reference a source account in a transfer transaction. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_103">
   <title xml:id="de_103">DE-103 Account identification 2</title>
   <indexterm>
@@ -3926,7 +3265,7 @@
    <title>Description</title>
    <para>Used to reference a destination account in a transfer transaction. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
  <sect1 xml:id="S.de_111">
   <title xml:id="de_111">DE-111 Discretionary handback data</title>
   <indexterm>
@@ -3945,7 +3284,7 @@
    <title>Description</title>
    <para>Optional user field to be echoed back by the &PRODUCTNAME; based system. </para>
   </simplesect>
- </sect1>
+ </sect1><?hard-pagebreak?>
   <sect1 xml:id="S.de_112">
     <title xml:id="de_112">DE-112 Discretionary transport data</title>
     <indexterm>
@@ -3964,12 +3303,12 @@
       <title>Description</title>
       <para>Optional user field to be handled by the &PRODUCTNAME; based system and transmitted to Destination Stations</para>
     </simplesect>
-  </sect1>
+  </sect1><?hard-pagebreak?>
   <sect1 xml:id="S.de_113">
-    <title xml:id="de_113">DE-113 jCard / jPTS data elements</title>
+    <title xml:id="de_113">DE-113 TPP data elements</title>
     <indexterm>
       <primary>Data Elements</primary>
-      <secondary>DE 113, jCard / jPTS data elements</secondary>
+      <secondary>DE 113, TPP data elements</secondary>
     </indexterm>
     <simplesect>
       <title>Data Element: 113</title>
@@ -3981,9 +3320,47 @@
     </simplesect>
     <simplesect>
       <title>Description</title>
-      <para><emphasis role="bold">jCard and jPTS</emphasis> use data element 113 to hold application specific data elements.
+      <para><emphasis role="bold">TPP</emphasis> use data element 113 to hold application specific data elements.
       See <xref linkend="jcard_data_elements" /> for details.
       </para>
     </simplesect>
-  </sect1>
+  </sect1><?hard-pagebreak?>
+  <sect1 xml:id="S.de_114">
+    <title xml:id="de_114">DE-114 Reserved for private use</title>
+    <indexterm>
+      <primary>Data Elements</primary>
+      <secondary>DE 114, Reserved for private use</secondary>
+    </indexterm>
+    <simplesect>
+      <title>Data Element: 114</title>
+      <para>Reserved for private use</para>
+    </simplesect>
+    <simplesect>
+      <title>Format: B..9999, LLLLBINARY</title>
+      <para/>
+    </simplesect>
+    <simplesect>
+      <title>Description</title>
+      <para>Reserved for application-specific, customer private use.</para>
+    </simplesect>
+  </sect1><?hard-pagebreak?>
+  <sect1 xml:id="S.de_115">
+    <title xml:id="de_115">DE-115 Reserved for private use</title>
+    <indexterm>
+      <primary>Data Elements</primary>
+      <secondary>DE 115, Reserved for private use</secondary>
+    </indexterm>
+    <simplesect>
+      <title>Data Element: 115</title>
+      <para>Reserved for private use</para>
+    </simplesect>
+    <simplesect>
+      <title>Format: B..9999, LLLLBINARY</title>
+      <para/>
+    </simplesect>
+    <simplesect>
+      <title>Description</title>
+      <para>Reserved for application-specific, customer private use.</para>
+    </simplesect>
+  </sect1><?hard-pagebreak?>
 </chapter>

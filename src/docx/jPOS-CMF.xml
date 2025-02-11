@@ -14,8 +14,8 @@
       <email>support@jpos.org</email>
     </author>
     <copyright>
-      <year> 2007-2013 </year>
-      <holder> Alejandro Revilla d/b/a jPOS.org </holder>
+      <year> 2007-2025 </year>
+      <holder> jPOS Software SRL </holder>
     </copyright>
     <releaseinfo>&VERSION;</releaseinfo>
     <productname>&PRODUCTNAME;</productname>
@@ -49,9 +49,10 @@
   <xi:include href="function_codes.xml"/>
   <xi:include href="reason_codes.xml"/>
   <xi:include href="error_codes.xml"/>
-  <xi:include href="glossary.xml"/>
+  <xi:include href="mcc.xml"/>
   <xi:include href="revision_history.xml"/>
   <xi:include href="license.xml"/>
+  <xi:include href="glossary.xml"/>
   
  <index>
   <title>Index</title>
